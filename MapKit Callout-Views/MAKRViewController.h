@@ -6,11 +6,6 @@
 //  Copyright (c) 2013 alexrepty. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-
-@interface MAKRViewController : UIViewController <MKMapViewDelegate>
-
-@property(nonatomic,strong) IBOutlet MKMapView *mapView;
+@interface MAKRViewController : UIViewController
 
 @end

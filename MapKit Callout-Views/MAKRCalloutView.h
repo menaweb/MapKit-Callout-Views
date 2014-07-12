@@ -10,8 +10,6 @@
 
 @interface MAKRCalloutView : UIView
 
-@property(nonatomic,strong) UILabel *titleLabel;
-@property(nonatomic,strong) UILabel *subtitleLabel;
-@property(nonatomic,strong) UILabel *informationLabel;
+- (void)setTitleText:(NSString *)titleText subtitleText:(NSString *)subtitleText informationText:(NSString *)informationText;
 
 @end
