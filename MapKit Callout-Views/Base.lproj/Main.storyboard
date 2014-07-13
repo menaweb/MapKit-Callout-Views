@@ -101,7 +101,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLO-zM-mdp">
-                                        <rect key="frame" x="204" y="14" width="25" height="60"/>
+                                        <rect key="frame" x="204" y="9" width="25" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -120,7 +120,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2Am-6I-3Pi" secondAttribute="trailing" constant="35" id="3LI-gp-eKO"/>
-                                    <constraint firstAttribute="centerY" secondItem="ZLO-zM-mdp" secondAttribute="centerY" id="5MJ-LI-OS7"/>
+                                    <constraint firstAttribute="centerY" secondItem="ZLO-zM-mdp" secondAttribute="centerY" constant="5" id="5MJ-LI-OS7"/>
                                     <constraint firstItem="XSR-WY-OeF" firstAttribute="leading" secondItem="4gg-zU-VAs" secondAttribute="leading" constant="5" id="6Se-T3-Xyp"/>
                                     <constraint firstItem="KsR-li-INY" firstAttribute="top" secondItem="4gg-zU-VAs" secondAttribute="top" constant="5" id="Hs3-Di-alq"/>
                                     <constraint firstAttribute="trailing" secondItem="KsR-li-INY" secondAttribute="trailing" constant="35" id="MYb-3M-U2W"/>
