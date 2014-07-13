@@ -24,13 +24,35 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="BSY-BZ-DpO"/>
                                 </connections>
                             </mapView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9O-bC-4cR" userLabel="Top View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="0D8-A3-DFr"/>
+                                </constraints>
+                            </view>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="261-Qa-NeW" userLabel="Bottom View">
+                                <rect key="frame" x="0.0" y="468" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="vxa-eb-CMD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TBW-ty-TYr" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="HUc-du-vyD"/>
+                            <constraint firstItem="E9O-bC-4cR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="VHs-rY-3ei"/>
+                            <constraint firstAttribute="trailing" secondItem="E9O-bC-4cR" secondAttribute="trailing" id="Xla-jm-cyk"/>
                             <constraint firstAttribute="trailing" secondItem="TBW-ty-TYr" secondAttribute="trailing" id="bon-g2-W5x"/>
                             <constraint firstItem="TBW-ty-TYr" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="fXf-7z-mnt"/>
+                            <constraint firstAttribute="trailing" secondItem="261-Qa-NeW" secondAttribute="trailing" id="gco-Zs-OdD"/>
+                            <constraint firstItem="FZe-9a-7bI" firstAttribute="top" secondItem="261-Qa-NeW" secondAttribute="bottom" id="jSa-vK-HMT"/>
                             <constraint firstItem="FZe-9a-7bI" firstAttribute="top" secondItem="TBW-ty-TYr" secondAttribute="bottom" id="sMJ-eh-njX"/>
+                            <constraint firstItem="261-Qa-NeW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="thf-FR-8Rt"/>
+                            <constraint firstItem="E9O-bC-4cR" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="vbQ-Ca-3Yj"/>
                         </constraints>
                     </view>
                     <connections>

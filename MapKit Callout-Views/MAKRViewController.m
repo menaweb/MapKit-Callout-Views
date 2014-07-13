@@ -16,6 +16,17 @@
 
 NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRViewControllerMapAnnotationViewReuseIdentifier";
 
+// Disables log messages when debugging is turned off
+#ifndef NDEBUG
+
+#define DebugLog(message, ...) NSLog(@"%s: " message, __PRETTY_FUNCTION__, ##__VA_ARGS__)
+
+#else
+
+#define DebugLog(message, ...)
+
+#endif
+
 #pragma mark - Class Extension
 #pragma mark -
 
@@ -29,7 +40,7 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
 @end
 
 @implementation MAKRViewController {
-    BOOL _placeInsiderAnnotationView;
+    BOOL _placeInsideAnnotationView;
     BOOL _isPlacingCalloutView;
     BOOL _isUserMovingMapView;
     CGFloat _annotationViewHeight;
@@ -39,7 +50,7 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
 #pragma mark -
 
 - (void)viewDidLoad {
-    _placeInsiderAnnotationView = FALSE;
+    _placeInsideAnnotationView = FALSE;
     
 	MAKRSampleAnnotation *annotation = [MAKRSampleAnnotation new];
 	annotation.coordinate = CLLocationCoordinate2DMake(52.525923, 13.411399);
@@ -86,7 +97,7 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
             [self.view addSubview:calloutView];
-            [self.view bringSubviewToFront:calloutView];
+            [self.view insertSubview:calloutView aboveSubview:self.mapView];
             
             [calloutView setTitleText:annotationView.annotation.title subtitleText:annotationView.annotation.subtitle informationText:@"Today: AltTechTalks"];
             
@@ -112,7 +123,7 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
         frame.origin = origin;
         
         UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
-        [UIView animateWithDuration:animated ? 0.45f : 0.0f delay:0.0f usingSpringWithDamping:3.0 initialSpringVelocity:3.0 options:options animations:^{
+        [UIView animateWithDuration:animated ? 0.15f : 0.0f delay:0.0f usingSpringWithDamping:3.0 initialSpringVelocity:3.0 options:options animations:^{
             calloutView.frame = frame;
         } completion:^(BOOL finished) {
         }];
@@ -129,10 +140,9 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
 
 //// Track the selected annotation when map is being moved
 - (void)trackSelectedAnnotation {
-//    NSLog(@"%@", NSStringFromSelector(_cmd));
     if (_isUserMovingMapView && self.selectedAnnotation) {
         [self repositionCalloutView:self.calloutView animated:TRUE];
-        [self performSelector:@selector(trackSelectedAnnotation) withObject:nil afterDelay:0.1f];
+        [self performSelector:@selector(trackSelectedAnnotation) withObject:nil afterDelay:0.05f];
     }
 }
 
@@ -140,16 +150,25 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
 #pragma mark -
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-	MKAnnotationView *view = [mapView dequeueReusableAnnotationViewWithIdentifier:kMAKRViewControllerMapAnnotationViewReuseIdentifier];
+	MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kMAKRViewControllerMapAnnotationViewReuseIdentifier];
     
-    [view prepareForReuse];
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kMAKRViewControllerMapAnnotationViewReuseIdentifier];
+    }
     
-	return view;
+    NSAssert(annotationView, @"Annotation Vie must be defined.");
+    
+    [annotationView prepareForReuse];
+    
+//    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//    annotationView.canShowCallout = YES;
+    
+	return annotationView;
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
 	for (MKAnnotationView *annotationView in views) {
-		annotationView.canShowCallout = NO;
+		annotationView.canShowCallout = FALSE;
 	}
 }
 
@@ -161,7 +180,7 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
 	MAKRCalloutView *calloutView = (MAKRCalloutView *)vc.view;
     calloutView.translatesAutoresizingMaskIntoConstraints = YES;
     
-    if (_placeInsiderAnnotationView) {
+    if (_placeInsideAnnotationView) {
         [self placeCalloutView:calloutView insideAnnotationView:annotationView];
     }
     else {
@@ -174,7 +193,7 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
         self.selectedAnnotation = nil;
     }
     
-    if (_placeInsiderAnnotationView) {
+    if (_placeInsideAnnotationView) {
         [self.calloutView removeFromSuperview];
     }
     else {
@@ -189,13 +208,17 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
     _isUserMovingMapView = TRUE;
-    self.calloutView.alpha = 0.25f;
+    self.calloutView.alpha = 0.75f;
     [self trackSelectedAnnotation];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     _isUserMovingMapView = FALSE;
     self.calloutView.alpha = 1.0f;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    DebugLog(@"%@", NSStringFromSelector(_cmd));
 }
 
 @end
