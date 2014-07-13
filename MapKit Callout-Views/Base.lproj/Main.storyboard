@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TBW-ty-TYr">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBW-ty-TYr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
@@ -27,7 +27,7 @@
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9O-bC-4cR" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="0D8-A3-DFr"/>
                                 </constraints>
@@ -35,7 +35,7 @@
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="261-Qa-NeW" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="vxa-eb-CMD"/>
                                 </constraints>
@@ -75,7 +75,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gg-zU-VAs" userLabel="Container View">
-                                <rect key="frame" x="4" y="8" width="234" height="78"/>
+                                <rect key="frame" x="4" y="1" width="234" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="194" translatesAutoresizingMaskIntoConstraints="NO" id="KsR-li-INY">
@@ -101,7 +101,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLO-zM-mdp">
-                                        <rect key="frame" x="204" y="9" width="25" height="60"/>
+                                        <rect key="frame" x="204" y="14" width="25" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -125,7 +125,7 @@
                                     <constraint firstItem="KsR-li-INY" firstAttribute="top" secondItem="4gg-zU-VAs" secondAttribute="top" constant="5" id="Hs3-Di-alq"/>
                                     <constraint firstAttribute="trailing" secondItem="KsR-li-INY" secondAttribute="trailing" constant="35" id="MYb-3M-U2W"/>
                                     <constraint firstItem="KsR-li-INY" firstAttribute="leading" secondItem="4gg-zU-VAs" secondAttribute="leading" constant="5" id="QQS-aj-bfC"/>
-                                    <constraint firstAttribute="bottom" secondItem="2Am-6I-3Pi" secondAttribute="bottom" constant="5" id="aPS-SA-fGU"/>
+                                    <constraint firstAttribute="bottom" secondItem="2Am-6I-3Pi" secondAttribute="bottom" constant="15" id="aPS-SA-fGU"/>
                                     <constraint firstItem="2Am-6I-3Pi" firstAttribute="leading" secondItem="4gg-zU-VAs" secondAttribute="leading" constant="5" id="cgk-bG-v1m"/>
                                     <constraint firstItem="XSR-WY-OeF" firstAttribute="top" secondItem="KsR-li-INY" secondAttribute="bottom" constant="5" id="d2Q-dd-f3R"/>
                                     <constraint firstAttribute="trailing" secondItem="XSR-WY-OeF" secondAttribute="trailing" constant="35" id="gp7-Cf-HPR"/>
@@ -136,7 +136,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4gg-zU-VAs" firstAttribute="top" secondItem="Wnl-jP-DSS" secondAttribute="bottom" constant="8" id="1iv-K3-F9b"/>
+                            <constraint firstAttribute="centerY" secondItem="4gg-zU-VAs" secondAttribute="centerY" id="dP9-du-fKQ"/>
                             <constraint firstAttribute="trailing" secondItem="4gg-zU-VAs" secondAttribute="trailing" constant="4" id="oB1-Oe-Bf9"/>
                             <constraint firstItem="4gg-zU-VAs" firstAttribute="leading" secondItem="qoF-r8-q3U" secondAttribute="leading" constant="4" id="v5M-kr-Bvd"/>
                         </constraints>
