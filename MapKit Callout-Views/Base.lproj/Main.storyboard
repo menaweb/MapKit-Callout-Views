@@ -27,16 +27,62 @@
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9O-bC-4cR" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wc4-h4-TJe" userLabel="Title Label">
+                                        <rect key="frame" x="138" y="36" width="44" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="0D8-A3-DFr"/>
+                                    <constraint firstAttribute="centerX" secondItem="wc4-h4-TJe" secondAttribute="centerX" id="MGp-yY-VQc"/>
+                                    <constraint firstAttribute="centerY" secondItem="wc4-h4-TJe" secondAttribute="centerY" id="WpA-RR-i3t"/>
                                 </constraints>
                             </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="261-Qa-NeW" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSC-VK-OEe" userLabel="Container View">
+                                        <rect key="frame" x="10" y="31" width="300" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="gOS-gU-xgu">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="ELp-AN-m1j">
+                                                <rect key="frame" x="0.0" y="22" width="300" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="gOS-gU-xgu" secondAttribute="trailing" id="EvS-RB-JsP"/>
+                                            <constraint firstItem="gOS-gU-xgu" firstAttribute="leading" secondItem="XSC-VK-OEe" secondAttribute="leading" id="HWq-1P-T65"/>
+                                            <constraint firstItem="ELp-AN-m1j" firstAttribute="top" secondItem="gOS-gU-xgu" secondAttribute="bottom" id="Lr0-bf-WVs"/>
+                                            <constraint firstItem="gOS-gU-xgu" firstAttribute="top" secondItem="XSC-VK-OEe" secondAttribute="top" id="PVl-1u-Yzt"/>
+                                            <constraint firstAttribute="bottom" secondItem="ELp-AN-m1j" secondAttribute="bottom" id="UUV-He-zwl"/>
+                                            <constraint firstItem="ELp-AN-m1j" firstAttribute="leading" secondItem="XSC-VK-OEe" secondAttribute="leading" id="Xlp-BS-ecl"/>
+                                            <constraint firstAttribute="trailing" secondItem="ELp-AN-m1j" secondAttribute="trailing" id="a9V-6g-ult"/>
+                                            <constraint firstAttribute="width" constant="300" id="kzZ-xO-6yK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="XSC-VK-OEe" secondAttribute="centerY" id="bjW-07-WZ8"/>
+                                    <constraint firstAttribute="centerX" secondItem="XSC-VK-OEe" secondAttribute="centerX" id="hci-6o-ost"/>
                                     <constraint firstAttribute="height" constant="100" id="vxa-eb-CMD"/>
                                 </constraints>
                             </view>
@@ -56,7 +102,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="informationLabel" destination="ELp-AN-m1j" id="xoZ-VV-IYw"/>
                         <outlet property="mapView" destination="TBW-ty-TYr" id="UAP-Eb-T1F"/>
+                        <outlet property="subtitleLabel" destination="gOS-gU-xgu" id="lSP-Ua-Ycc"/>
+                        <outlet property="titleLabel" destination="wc4-h4-TJe" id="114-xe-hhL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -141,6 +190,7 @@
                             <constraint firstItem="4gg-zU-VAs" firstAttribute="leading" secondItem="qoF-r8-q3U" secondAttribute="leading" constant="4" id="v5M-kr-Bvd"/>
                         </constraints>
                         <connections>
+                            <outlet property="calloutButton" destination="ZLO-zM-mdp" id="Ic2-lE-Qeb"/>
                             <outlet property="containerView" destination="4gg-zU-VAs" id="2pu-RI-di9"/>
                             <outlet property="informationLabel" destination="2Am-6I-3Pi" id="S8c-rq-bJz"/>
                             <outlet property="subtitleLabel" destination="XSR-WY-OeF" id="SnW-2I-aVu"/>
@@ -156,7 +206,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4J-MZ-P6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563" y="143"/>
+            <point key="canvasLocation" x="392" y="31"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

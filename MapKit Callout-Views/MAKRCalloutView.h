@@ -15,16 +15,16 @@
 @interface MAKRCalloutView : UIView
 
 @property (weak, nonatomic) id <MAKRCalloutViewDelegate> delegate;
-@property (nonatomic, readonly) CGPoint calculatedOrigin;
+//@property (nonatomic, readonly) CGPoint calculatedOrigin;
+
+@property (nonatomic, strong) UIColor *bubbleStrokeColor;
+@property (nonatomic, strong) UIColor *bubbleBackgroundColor;
+
+@property (weak, nonatomic, readonly) IBOutlet UIButton *calloutButton;
 
 - (void)setTitleText:(NSString *)titleText subtitleText:(NSString *)subtitleText informationText:(NSString *)informationText;
 
-- (void)placeInsideAnnotationView:(MKAnnotationView *)annotationView;
-- (void)placeOverMapView:(MKMapView *)mapView aboveAnnotationView:(MKAnnotationView *)annotationView;
-- (void)reposition:(BOOL)animated;
-
-- (void)startTracking;
-- (void)stopTracking;
+- (void)placeInMapView:(MKMapView *)mapView insideAnnotationView:(MKAnnotationView *)annotationView;
 
 @end
 
@@ -33,5 +33,7 @@
 @required
 
 - (void)configureCalloutView:(MAKRCalloutView *)calloutView withAnnotationView:(MKAnnotationView *)annotationView;
+
+- (void)calloutView:(MAKRCalloutView *)calloutView buttonTappedWithAnnotationView:(MKAnnotationView *)annotationView;
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26D0A8A5197358FA00F64384 /* MAKRPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D0A8A4197358FA00F64384 /* MAKRPinAnnotationView.m */; };
 		B4A6648A1854E150009B0ACB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A664891854E150009B0ACB /* Foundation.framework */; };
 		B4A6648C1854E150009B0ACB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A6648B1854E150009B0ACB /* CoreGraphics.framework */; };
 		B4A6648E1854E150009B0ACB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A6648D1854E150009B0ACB /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26D0A8A3197358FA00F64384 /* MAKRPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAKRPinAnnotationView.h; sourceTree = "<group>"; };
+		26D0A8A4197358FA00F64384 /* MAKRPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAKRPinAnnotationView.m; sourceTree = "<group>"; };
 		87465958296943FFA17B78BF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DBB60077924F04A5EC496B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B4A664861854E150009B0ACB /* MapKit Callout-Views.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MapKit Callout-Views.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +138,8 @@
 				B4A6649F1854E150009B0ACB /* MAKRViewController.m */,
 				B4A664BE1854E1B5009B0ACB /* MAKRSampleAnnotation.h */,
 				B4A664BF1854E1B5009B0ACB /* MAKRSampleAnnotation.m */,
+				26D0A8A3197358FA00F64384 /* MAKRPinAnnotationView.h */,
+				26D0A8A4197358FA00F64384 /* MAKRPinAnnotationView.m */,
 				B4E1583518561C6000ED3895 /* MAKRCalloutView.h */,
 				B4E1583618561C6000ED3895 /* MAKRCalloutView.m */,
 				B4A664A11854E150009B0ACB /* Images.xcassets */,
@@ -309,6 +314,7 @@
 				B4E1583718561C6000ED3895 /* MAKRCalloutView.m in Sources */,
 				B4A664C01854E1B5009B0ACB /* MAKRSampleAnnotation.m in Sources */,
 				B4A664A01854E150009B0ACB /* MAKRViewController.m in Sources */,
+				26D0A8A5197358FA00F64384 /* MAKRPinAnnotationView.m in Sources */,
 				B4A6649A1854E150009B0ACB /* MAKRAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,15 +21,50 @@
 @property(weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property(weak, nonatomic) IBOutlet UILabel *informationLabel;
 
+@property (weak, readwrite, nonatomic) IBOutlet UIButton *calloutButton;
+
 @property (weak, nonatomic) MKMapView *mapView;
-@property (weak, nonatomic)MKAnnotationView *annotationView;
+@property (weak, nonatomic) MKAnnotationView *annotationView;
+
+@property (nonatomic, readonly) CGPoint calculatedOrigin;
 
 @end
 
 @implementation MAKRCalloutView {
-    BOOL _isPlacedInsiderAnnotationView;
     BOOL _isPlacingCalloutView;
     BOOL _isTracking;
+}
+
+#pragma mark - Initialization
+#pragma mark -
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup {
+    self.bubbleStrokeColor = [UIColor lightGrayColor];
+    self.bubbleBackgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark - Public
@@ -45,15 +80,19 @@
 }
 
 //// Place the callout view inside of the annotation view which allows for moving with the map view
-- (void)placeInsideAnnotationView:(MKAnnotationView *)annotationView {
-    _isPlacedInsiderAnnotationView = TRUE;
+- (void)placeInMapView:(MKMapView *)mapView insideAnnotationView:(MKAnnotationView *)annotationView {
+    self.mapView = mapView;
     self.annotationView = annotationView;
     self.alpha = 0.0f;
     
 	[annotationView addSubview:self];
     [self configure];
     
-	self.center = CGPointMake((CGRectGetWidth(annotationView.bounds) / 2.0) - 9.0, -1.0 * CGRectGetHeight(self.frame) / 2);
+    CGRect frame = self.frame;
+    frame.origin = self.calculatedOrigin;
+    self.frame = frame;
+    
+    [mapView setCenterCoordinate:annotationView.annotation.coordinate animated:TRUE];
     
     UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
     [UIView animateWithDuration:0.25f delay:0.0f usingSpringWithDamping:9.0 initialSpringVelocity:9.0 options:options animations:^{
@@ -63,99 +102,25 @@
     }];
 }
 
-//// Place the callout view over the map view above teh annotation view so button can be tapped
-- (void)placeOverMapView:(MKMapView *)mapView aboveAnnotationView:(MKAnnotationView *)annotationView {
-    _isPlacedInsiderAnnotationView = FALSE;
-    _isPlacingCalloutView = TRUE;
-    
-    self.mapView = mapView;
-    self.annotationView = annotationView;
-    
-    self.alpha = 0.0f;
-    
-    UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
-    [UIView animateWithDuration:0.15f delay:0.0f usingSpringWithDamping:3.0 initialSpringVelocity:12.0 options:options animations:^{
-        [mapView setCenterCoordinate:annotationView.annotation.coordinate animated:TRUE];
-    } completion:^(BOOL finished) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            
-            [mapView.superview addSubview:self];
-            [mapView.superview insertSubview:self aboveSubview:mapView];
-            [self configure];
+#pragma mark - Hit Test
+#pragma mark -
 
-            CGRect frame = self.frame;
-            frame.origin = self.calculatedOrigin;
-            self.frame = frame;
-            
-            [UIView animateWithDuration:0.25f delay:0.0f usingSpringWithDamping:9.0 initialSpringVelocity:9.0 options:options animations:^{
-                self.alpha = 1.0f;
-            } completion:^(BOOL finished) {
-                _isPlacingCalloutView = FALSE;
-            }];
-        });
-    }];
-}
-
-//// Provides origin for callout view to place it directly above the selected annotation
-- (CGPoint)calculatedOrigin {
-    NSAssert(self.mapView, @"MapView is required");
-    NSAssert(self.annotationView, @"AnnotationView is required");
-    CGPoint point = [self.mapView convertCoordinate:self.annotationView.annotation.coordinate toPointToView:self.mapView];
-    CGPoint origin = CGPointMake(point.x - (CGRectGetWidth(self.frame) / 2), point.y - CGRectGetHeight(self.frame) - CGRectGetHeight(self.annotationView.frame));
-    
-    return origin;
-}
-
-//// Animates repositioning of callout view
-- (void)reposition:(BOOL)animated {
-    if (self.annotationView.annotation) {
-        CGFloat duration = animated ? 0.1f : 0.0f;
-        UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
-        [UIView animateWithDuration:duration delay:0.0f usingSpringWithDamping:3.0 initialSpringVelocity:3.0 options:options animations:^{
-            CGRect frame = self.frame;
-            frame.origin = self.calculatedOrigin;
-            self.frame = frame;
-        } completion:^(BOOL finished) {
-        }];
-    }
-}
-
-//// Starts tracking the movement of the annotation view
-- (void)startTracking {
-    if (_isPlacedInsiderAnnotationView) {
-        return;
-    }
-    _isTracking = TRUE;
-    self.alpha = 0.75f;
-    [self track];
-}
-
-//// Stops tracking the movement of the annotation view
-- (void)stopTracking {
-    if (_isPlacedInsiderAnnotationView) {
-        return;
-    }
-    [self reposition:FALSE];
-    _isTracking = FALSE;
-    self.alpha = 1.0f;
+//// Test if the point is in the button which is the only area the user can tap
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    return CGRectContainsPoint(self.calloutButton.frame, point) ? self.calloutButton : nil;
 }
 
 #pragma mark - User Actions
 #pragma mark -
 
 - (IBAction)buttonTapped:(id)sender {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    if ([self.delegate respondsToSelector:@selector(calloutView:buttonTappedWithAnnotationView:)]) {
+        [self.delegate calloutView:self buttonTappedWithAnnotationView:self.annotationView];
+    }
 }
 
 #pragma mark - Private
 #pragma mark -
-
-- (void)track {
-    [self reposition:TRUE];
-    if (_isTracking) {
-        [self performSelector:@selector(track) withObject:nil afterDelay:0.01f];
-    }
-}
 
 - (void)configure {
     NSAssert(self.delegate, @"Delegate is required");
@@ -164,6 +129,17 @@
     }
     
     [self adjustHeightWithIntrinsicSize];
+}
+
+//// Provides origin for callout view to place it directly above the selected annotation
+- (CGPoint)calculatedOrigin {
+    NSAssert(self.annotationView, @"AnnotationView is required");
+    
+    CGFloat xPos = (((CGRectGetWidth(self.frame) / 2) - (CGRectGetWidth(self.annotationView.frame) / 2)) * -1) + self.annotationView.calloutOffset.x;
+    CGFloat yPos = CGRectGetHeight(self.frame) * -1;
+    CGPoint origin = CGPointMake(xPos, yPos);
+    
+    return origin;
 }
 
 - (void)adjustHeightWithIntrinsicSize {
@@ -216,8 +192,8 @@
     
     CGContextSetLineJoin(context, kCGLineJoinRound);
     CGContextSetLineWidth(context, strokeWidth);
-    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] colorWithAlphaComponent:0.9].CGColor);
+    CGContextSetStrokeColorWithColor(context, self.bubbleStrokeColor.CGColor);
+    CGContextSetFillColorWithColor(context, [self.bubbleBackgroundColor colorWithAlphaComponent:0.9].CGColor);
     
     CGContextBeginPath(context);
     

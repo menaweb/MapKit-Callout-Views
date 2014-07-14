@@ -11,7 +11,9 @@
 
 @interface MAKRSampleAnnotation : NSObject <MKAnnotation>
 
-- (void)setTitle:(NSString *)title;
-- (void)setSubtitle:(NSString *)subtitle;
+@property(nonatomic,assign) CLLocationCoordinate2D coordinate;
+@property(nonatomic,copy) NSString *title;
+@property(nonatomic,copy) NSString *subtitle;
+@property(nonatomic,copy) NSString *information;
 
 @end
