@@ -29,7 +29,7 @@
     if (calloutView) {
         // adjust point for placement of callout view
         CGPoint calculatedOrigin = calloutView.frame.origin;
-        CGPoint adjustedPoint = CGPointMake(ABS(calculatedOrigin.x - point.x), ABS(calculatedOrigin.y - point.y));
+        CGPoint adjustedPoint = CGPointMake((calculatedOrigin.x - point.x) * -1, (calculatedOrigin.y - point.y) * -1);
         
         // check with the callout view (proper encapsultation)
         UIView *view = [calloutView hitTest:adjustedPoint withEvent:event];

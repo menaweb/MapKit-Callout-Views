@@ -97,7 +97,7 @@ NSString *const kMAKRViewControllerMapAnnotationViewReuseIdentifier = @"MAKRView
         annotationView = [[MAKRPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kMAKRViewControllerMapAnnotationViewReuseIdentifier];
     }
     
-    NSAssert(annotationView, @"Annotation Vie must be defined.");
+    NSAssert(annotationView, @"Annotation View must be defined.");
     
     [annotationView prepareForReuse];
     
