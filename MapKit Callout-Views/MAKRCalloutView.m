@@ -70,7 +70,7 @@
 #pragma mark - Public
 #pragma mark -
 
-// Set the title, subtitle and information text
+//// Set the title, subtitle and information text
 - (void)setTitleText:(NSString *)titleText subtitleText:(NSString *)subtitleText informationText:(NSString *)informationText {
     self.titleLabel.text = titleText;
     self.subtitleLabel.text = subtitleText;
@@ -122,6 +122,7 @@
 #pragma mark - Private
 #pragma mark -
 
+//// Calls delegate to allow for setting content and adjusting size before creating bubble image
 - (void)configure {
     NSAssert(self.delegate, @"Delegate is required");
     if ([self.delegate respondsToSelector:@selector(configureCalloutView:withAnnotationView:)]) {
@@ -155,6 +156,7 @@
     self.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
 }
 
+//// Draw the bubble view
 - (UIImage *)drawRoundedCorners:(CGSize)size position:(CGFloat)position borderRadius:(CGFloat)borderRadius strokeWidth:(CGFloat)strokeWidth {
     CGSize arrowSize = CGSizeMake(kWidthOfArrow, kHeightOfArrow);
     
